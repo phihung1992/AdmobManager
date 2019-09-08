@@ -1,10 +1,11 @@
 package com.attlib.admobmanager;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.attlib.adsmgr.BannerAdsManager;
 import com.attlib.adsmgr.InterstitialAdsManager;

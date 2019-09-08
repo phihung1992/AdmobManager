@@ -14,7 +14,7 @@ public class VideoAdsManager {
     private RewardedVideoAd mRvGetCoins;
     private String mAdId;
 
-    private VideoAdsManager() {
+    protected VideoAdsManager() {
 
     }
 
