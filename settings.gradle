@@ -1,1 +1,2 @@
 include ':app', ':adsmgr'
+include ':mylibrary2'
