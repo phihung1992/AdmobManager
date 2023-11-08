@@ -2,14 +2,15 @@ package com.attlib.admobmanager;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 
+import com.attlib.adsmgr.AdmobMobileAd;
 import com.attlib.adsmgr.BannerAdsManager;
+import com.attlib.adsmgr.Constants;
 import com.attlib.adsmgr.InterstitialAdsManager;
-import com.attlib.adsmgr.VideoAdsManager;
+import com.attlib.adsmgr.RewardedAdsManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,50 +19,55 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Use Intertitial Ads
-        InterstitialAdsManager.getInstance().init(getApplicationContext(), "ca-app-pub-3940256099942544/1033173712");
+        AdmobMobileAd.AddTestDeviceId("BC0BE802F09BB8D72B45C6984F40239B");
+        AdmobMobileAd.init(this);
+
+
+
+        // Use Interstitial Ads
+        InterstitialAdsManager.getInstance().init(this, Constants.TEST_INTERSTITIAL_AD_ID);
         InterstitialAdsManager.getInstance().load();
 
         findViewById(R.id.full_screen_ad).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InterstitialAdsManager.getInstance().show(100);
+                InterstitialAdsManager.getInstance().show(MainActivity.this, 100);
             }
         });
 
         // Reward  Video Ads
-        VideoAdsManager.getInstance().init(this, "ca-app-pub-3940256099942544/5224354917", new VideoAdsManager.OnCallBack() {
-            @Override
-            public void onLoaded() {
-                Toast.makeText(MainActivity.this, "Reward video is loaded!", Toast.LENGTH_SHORT).show();
+//        RewardedAdsManager.getInstance().init(this, "ca-app-pub-3940256099942544/5224354917", new RewardedAdsManager.OnCallBack() {
+//            @Override
+//            public void onLoaded() {
+//                Toast.makeText(MainActivity.this, "Reward video is loaded!", Toast.LENGTH_SHORT).show();
+//
+//                // Show when load done
+//                RewardedAdsManager.getInstance().show();
+//            }
+//
+//            @Override
+//            public void onRewarded() {
+//                Toast.makeText(MainActivity.this, "Reward video is onRewarded!", Toast.LENGTH_SHORT).show();
+//                // TODO: Somethings when user watch video done
+//            }
+//        });
 
-                // Show when load done
-                VideoAdsManager.getInstance().show();
-            }
-
-            @Override
-            public void onRewarded() {
-                Toast.makeText(MainActivity.this, "Reward video is onRewarded!", Toast.LENGTH_SHORT).show();
-                // TODO: Somethings when user watch video done
-            }
-        });
-
-        findViewById(R.id.reward_ad).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (VideoAdsManager.getInstance().isLoaded()) {
-                    VideoAdsManager.getInstance().show();
-                } else {
-                    VideoAdsManager.getInstance().load();
-//                    showLoading();
-                }
-            }
-        });
+//        findViewById(R.id.reward_ad).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (RewardedAdsManager.getInstance().isLoaded()) {
+//                    RewardedAdsManager.getInstance().show();
+//                } else {
+//                    RewardedAdsManager.getInstance().load();
+////                    showLoading();
+//                }
+//            }
+//        });
 
         // Banner Ads
         View bannerAd = BannerAdsManager.getInstance()
-                .createBanner(this, BannerAdsManager.BannerSize.BANNER, "ca-app-pub-3940256099942544/6300978111");
-        LinearLayout lnMain = findViewById(R.id.ln_main);
+                .createBanner(this, Constants.BannerSize.BANNER, Constants.TEST_BANNER_AD_ID);
+        LinearLayoutCompat lnMain = findViewById(R.id.ln_main);
         lnMain.addView(bannerAd);
     }
 }
