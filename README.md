@@ -10,6 +10,7 @@ Gradle
 allprojects {
 	repositories {
 		...
+		mavenCentral()
 		maven { url 'https://jitpack.io' }
 	}
 }
@@ -18,7 +19,7 @@ allprojects {
 ###### Module Gradle
 ```groovy
 dependencies {
-	implementation 'com.github.phihung1992:AdmobManager:1.0'
+	implementation 'com.github.phihung1992:AdmobManager:2.2'
 }
 ```
 
