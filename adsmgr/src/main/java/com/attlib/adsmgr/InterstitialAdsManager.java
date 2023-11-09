@@ -61,13 +61,10 @@ public class InterstitialAdsManager {
         }
     }
 
-    public void show(Activity activity, int appearPercent) {
-        if (new Random().nextInt(100) > appearPercent) {
-            return;
-        }
-
+    public boolean show(Activity activity) {
         if (mInterstitialAd == null) {
             load();
+            return false;
         } else {
             mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                 @Override
@@ -104,6 +101,7 @@ public class InterstitialAdsManager {
                 }
             });
             mInterstitialAd.show(activity);
+            return true;
         }
     }
 }

@@ -60,7 +60,7 @@ public class RewardedAdsManager {
                 });
     }
 
-    public void show() {
+    public boolean show() {
         if (mRvAd != null) {
             mRvAd.show((Activity) mContext, new OnUserEarnedRewardListener() {
                 @Override
@@ -72,11 +72,12 @@ public class RewardedAdsManager {
                     if (mListener != null) mListener.onRewarded();
                 }
             });
+            return true;
         } else {
             Log.d(Constants.ADMOB_MANAGER_LOG, "The rewarded ad wasn't ready yet.");
             load();
+            return  false;
         }
-
     }
 
     public interface OnCallBack {

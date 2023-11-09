@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.full_screen_ad).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InterstitialAdsManager.getInstance().show(MainActivity.this, 100);
+                InterstitialAdsManager.getInstance().show(MainActivity.this);
             }
         });
 
