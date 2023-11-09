@@ -20,9 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         AdmobMobileAd.AddTestDeviceId("BC0BE802F09BB8D72B45C6984F40239B");
+        AdmobMobileAd.AddTestDeviceId("6B9FB54823BD16F4580CA328FF072BF1");
         AdmobMobileAd.init(this);
-
-
 
         // Use Interstitial Ads
         InterstitialAdsManager.getInstance().init(this, Constants.TEST_INTERSTITIAL_AD_ID);
