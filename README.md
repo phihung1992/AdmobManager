@@ -19,7 +19,7 @@ allprojects {
 ###### Module Gradle
 ```groovy
 dependencies {
-	implementation 'com.github.phihung1992:AdmobManager:2.2'
+	implementation 'com.github.phihung1992:AdmobManager:2.3'
 }
 ```
 
