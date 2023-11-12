@@ -6,7 +6,7 @@ public class Constants {
     public  static String TEST_INTERSTITIAL_AD_ID = "ca-app-pub-3940256099942544/1033173712";
     public  static String TEST_REWARDED_VIDEO_AD_ID = "ca-app-pub-3940256099942544/5224354917";
 
-    public static final String ADMOB_MANAGER_LOG = "ADMOB_MANAGER_LOG";
+    public static final String DEFAULT_LOG_TAG = "ADMOB_MANAGER_LOG";
 
     public enum BannerSize {
         BANNER,

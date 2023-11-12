@@ -47,17 +47,21 @@ public class RewardedAdsManager {
                     @Override
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                         // Handle the error.
-                        Log.d(Constants.ADMOB_MANAGER_LOG, loadAdError.toString());
+                        Log.d(AdmobMobileAd.getLogTag(), loadAdError.toString());
                         mRvAd = null;
                     }
 
                     @Override
                     public void onAdLoaded(@NonNull RewardedAd ad) {
                         mRvAd = ad;
-                        Log.d(Constants.ADMOB_MANAGER_LOG, "Ad was loaded.");
+                        Log.d(AdmobMobileAd.getLogTag(), "Ad was loaded.");
                         if (mListener != null) mListener.onLoaded();
                     }
                 });
+    }
+
+    public boolean IsLoaded() {
+        return mRvAd != null;
     }
 
     public boolean show() {
@@ -66,7 +70,7 @@ public class RewardedAdsManager {
                 @Override
                 public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
                     // Handle the reward.
-                    Log.d(Constants.ADMOB_MANAGER_LOG, "The user earned the reward.");
+                    Log.d(AdmobMobileAd.getLogTag(), "The user earned the reward.");
 //                    int rewardAmount = rewardItem.getAmount();
 //                    String rewardType = rewardItem.getType();
                     if (mListener != null) mListener.onRewarded();
@@ -74,9 +78,8 @@ public class RewardedAdsManager {
             });
             return true;
         } else {
-            Log.d(Constants.ADMOB_MANAGER_LOG, "The rewarded ad wasn't ready yet.");
-            load();
-            return  false;
+            Log.e(AdmobMobileAd.getLogTag(), "The rewarded ad wasn't ready yet.");
+            return false;
         }
     }
 

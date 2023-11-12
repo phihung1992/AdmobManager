@@ -1,5 +1,7 @@
 package com.attlib.adsmgr;
 
+import static com.attlib.adsmgr.Constants.DEFAULT_LOG_TAG;
+
 import android.content.Context;
 
 import com.google.android.gms.ads.MobileAds;
@@ -10,6 +12,16 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import java.util.ArrayList;
 
 public class AdmobMobileAd {
+    private static String logTag = DEFAULT_LOG_TAG;
+
+    public static String getLogTag() {
+        return logTag;
+    }
+
+    public static void setLogTag(String logTag) {
+        AdmobMobileAd.logTag = logTag;
+    }
+
     public static ArrayList<String> mTestDeviceIds = new ArrayList<>();
 
     public static void AddTestDeviceId(String deviceId) {
