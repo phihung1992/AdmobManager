@@ -3,8 +3,6 @@ package com.attlib.adsmgr;
 import android.content.Context;
 import android.view.View;
 
-import com.attlib.adsmgr.Constants.BannerSize;
-
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -22,7 +20,7 @@ public class BannerAdsManager {
         return instance;
     }
 
-    public View createBanner(Context context, BannerSize size, String adUnitId) {
+    public View createBanner(Context context, Constants.BannerSize size, String adUnitId) {
         AdView adView = new AdView(context);
         adView.setAdSize(getAdSize(size));
         adView.setAdUnitId(adUnitId);
@@ -32,7 +30,7 @@ public class BannerAdsManager {
         return adView;
     }
 
-    private AdSize getAdSize(BannerSize size) {
+    private AdSize getAdSize(Constants.BannerSize size) {
         switch (size) {
             case LARGE_BANNER:
                 return AdSize.LARGE_BANNER;
@@ -47,3 +45,4 @@ public class BannerAdsManager {
         }
     }
 }
+

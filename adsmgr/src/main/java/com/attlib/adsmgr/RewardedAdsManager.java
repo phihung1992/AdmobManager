@@ -7,15 +7,11 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.OnUserEarnedRewardListener;
-import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
-public class RewardedAdsManager {
+public class RewardedAdsManager extends BaseAdsManager {
     private Context mContext;
     private static RewardedAdsManager instance;
     private RewardedAd mRvAd;
@@ -39,6 +35,9 @@ public class RewardedAdsManager {
         mListener = listener;
     }
 
+    public void setListener(OnCallBack mListener) {
+        this.mListener = mListener;
+    }
 
     public void load() {
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -47,14 +46,14 @@ public class RewardedAdsManager {
                     @Override
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                         // Handle the error.
-                        Log.d(AdmobMobileAd.getLogTag(), loadAdError.toString());
+                        logError(loadAdError.toString());
                         mRvAd = null;
                     }
 
                     @Override
                     public void onAdLoaded(@NonNull RewardedAd ad) {
                         mRvAd = ad;
-                        Log.d(AdmobMobileAd.getLogTag(), "Ad was loaded.");
+                        logDebug("Ad was loaded.");
                         if (mListener != null) mListener.onLoaded();
                     }
                 });
@@ -66,19 +65,18 @@ public class RewardedAdsManager {
 
     public boolean show() {
         if (mRvAd != null) {
-            mRvAd.show((Activity) mContext, new OnUserEarnedRewardListener() {
-                @Override
-                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                    // Handle the reward.
-                    Log.d(AdmobMobileAd.getLogTag(), "The user earned the reward.");
+            mRvAd.show((Activity) mContext, rewardItem -> {
+                // Handle the reward.
+                logDebug("The user earned the reward.");
 //                    int rewardAmount = rewardItem.getAmount();
 //                    String rewardType = rewardItem.getType();
-                    if (mListener != null) mListener.onRewarded();
-                }
+                if (mListener != null) mListener.onRewarded();
+                mRvAd = null;
             });
+
             return true;
         } else {
-            Log.e(AdmobMobileAd.getLogTag(), "The rewarded ad wasn't ready yet.");
+            logError("The rewarded ad wasn't ready yet.");
             return false;
         }
     }
@@ -89,4 +87,5 @@ public class RewardedAdsManager {
         void onRewarded();
     }
 }
+
 

@@ -13,9 +13,7 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
-import java.util.Random;
-
-public class InterstitialAdsManager {
+public class InterstitialAdsManager extends BaseAdsManager {
     private static InterstitialAdsManager instance;
     private InterstitialAd mInterstitialAd;
     private Context mApplicationContext;
@@ -48,13 +46,13 @@ public class InterstitialAdsManager {
                             // The mInterstitialAd reference will be null until
                             // an ad is loaded.
                             mInterstitialAd = interstitialAd;
-                            Log.i(AdmobMobileAd.getLogTag(), "onAdLoaded");
+                            logDebug("onAdLoaded");
                         }
 
                         @Override
                         public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                             // Handle the error
-                            Log.d(AdmobMobileAd.getLogTag(), loadAdError.toString());
+                            logError(loadAdError.toString());
                             mInterstitialAd = null;
                         }
                     });
@@ -74,34 +72,34 @@ public class InterstitialAdsManager {
                 @Override
                 public void onAdClicked() {
                     // Called when a click is recorded for an ad.
-                    Log.d(AdmobMobileAd.getLogTag(), "Ad was clicked.");
+                    logDebug("Ad was clicked.");
                 }
 
                 @Override
                 public void onAdDismissedFullScreenContent() {
                     // Called when ad is dismissed.
                     // Set the ad reference to null so you don't show the ad a second time.
-                    Log.d(AdmobMobileAd.getLogTag(), "Ad dismissed fullscreen content.");
+                    logDebug("Ad dismissed fullscreen content.");
                     mInterstitialAd = null;
                 }
 
                 @Override
                 public void onAdFailedToShowFullScreenContent(AdError adError) {
                     // Called when ad fails to show.
-                    Log.e(AdmobMobileAd.getLogTag(), "Ad failed to show fullscreen content.");
+                    logError("Ad failed to show fullscreen content.");
                     mInterstitialAd = null;
                 }
 
                 @Override
                 public void onAdImpression() {
                     // Called when an impression is recorded for an ad.
-                    Log.d(AdmobMobileAd.getLogTag(), "Ad recorded an impression.");
+                    logDebug("Ad recorded an impression.");
                 }
 
                 @Override
                 public void onAdShowedFullScreenContent() {
                     // Called when ad is shown.
-                    Log.d(AdmobMobileAd.getLogTag(), "Ad showed fullscreen content.");
+                    logDebug("Ad showed fullscreen content.");
                 }
             });
             mInterstitialAd.show(activity);

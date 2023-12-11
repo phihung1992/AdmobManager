@@ -6,11 +6,9 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
-import com.attlib.adsmgr.AdmobMobileAd;
 import com.attlib.adsmgr.BannerAdsManager;
 import com.attlib.adsmgr.Constants;
 import com.attlib.adsmgr.InterstitialAdsManager;
-import com.attlib.adsmgr.RewardedAdsManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,10 +16,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        AdmobMobileAd.AddTestDeviceId("BC0BE802F09BB8D72B45C6984F40239B");
-        AdmobMobileAd.AddTestDeviceId("6B9FB54823BD16F4580CA328FF072BF1");
-        AdmobMobileAd.init(this);
 
         // Use Interstitial Ads
         InterstitialAdsManager.getInstance().init(this, Constants.TEST_INTERSTITIAL_AD_ID);
