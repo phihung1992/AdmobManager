@@ -2,6 +2,7 @@ package com.attlib.admobmanager;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
@@ -21,12 +22,12 @@ public class MainActivity extends AppCompatActivity {
         InterstitialAdsManager.getInstance().init(this, Constants.TEST_INTERSTITIAL_AD_ID);
         InterstitialAdsManager.getInstance().load();
 
-        findViewById(R.id.full_screen_ad).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                InterstitialAdsManager.getInstance().show(MainActivity.this);
-            }
-        });
+//        findViewById(R.id.full_screen_ad).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                InterstitialAdsManager.getInstance().show(MainActivity.this);
+//            }
+//        });
 
         // Reward  Video Ads
 //        RewardedAdsManager.getInstance().init(this, "ca-app-pub-3940256099942544/5224354917", new RewardedAdsManager.OnCallBack() {
@@ -58,9 +59,8 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         // Banner Ads
-        View bannerAd = BannerAdsManager.getInstance()
-                .createBanner(this, Constants.BannerSize.BANNER, Constants.TEST_BANNER_AD_ID);
-        LinearLayoutCompat lnMain = findViewById(R.id.ln_main);
+        View bannerAd = BannerAdsManager.getInstance().createBanner(this, Constants.BannerSize.BANNER, Constants.TEST_BANNER_AD_ID);
+        LinearLayout lnMain = findViewById(R.id.ln_main);
         lnMain.addView(bannerAd);
     }
 }
